@@ -1,6 +1,7 @@
 package com.dapeng.flow.controller;
 
 
+import com.dapeng.flow.common.utils.PathUtil;
 import com.dapeng.flow.repository.service.ImageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -9,6 +10,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,16 +38,21 @@ public class ImageController {
     public void viewProcessImg(String instanceId, HttpServletResponse response) throws IOException {
         OutputStream os = null;
         try {
-            String directory = "F:" + File.separator + "temp" + File.separator;
+            String directory = PathUtil.getProjectpath() + "uploadFiles/activitiFile";
+            System.out.println("目标文件地址" + directory);
             final String suffix = ".png";
             File folder = new File(directory);
+            if(!folder.exists()){
+                folder.mkdirs();
+            }
             File[] files = folder.listFiles();
-            for (File file : files) {
-                if (file.getName().equals(instanceId + suffix)) {
-                    file.delete();
+            if(null != files && files.length > 0){
+                for (File file : files) {
+                    if (file.getName().equals(instanceId + suffix)) {
+                        file.delete();
+                    }
                 }
             }
-
             byte[] processImage = imageService.getFlowImgByProcInstId(instanceId);
             File dest = new File(directory + instanceId + suffix);
             os = new FileOutputStream(dest, true);

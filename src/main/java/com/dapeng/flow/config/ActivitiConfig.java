@@ -32,7 +32,7 @@ public class ActivitiConfig {
         // 执行工作流对应的数据源
         configuration.setDataSource(dataSource);
         // 是否自动创建流程引擎表
-        configuration.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
+        configuration.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_FALSE);
         configuration.setDeploymentResources(resources);
         //configuration.setDbIdentityUsed(false);
         //configuration.setAsyncExecutorActivate(false);

@@ -18,20 +18,23 @@
 	        <td width="20%">模型key</td>
 	        <td width="40%">操作</td>
 	    </tr>
-	        <#list modelList as model>
-	        <tr>
-	            <td width="10%">${model.id}</td>
-	            <td width="10%">${model.version}</td>
-	            <td width="20%"><#if (model.name)??>${model.name}<#else> </#if></td>
-	            <td width="20%"><#if (model.key)??>${model.key}<#else> </#if></td>
-	            <td width="40%">
-	             <a href="/editor?modelId=${model.id}">编辑</a>
-	             <a href="/publish?modelId=${model.id}">发布</a>
-	             <a href="/revokePublish?modelId=${model.id}">撤销</a>
-	             <a href="/delete?modelId=${model.id}">删除</a>
-	            </td>
-	        </tr>
-	       </#list>
+			<#if modelList??>
+				<#list modelList as model>
+					<tr>
+					<td width="10%">${model.id}</td>
+					<td width="10%">${model.version}</td>
+					<td width="20%"><#if (model.name)??>${model.name}<#else> </#if></td>
+					<td width="20%"><#if (model.key)??>${model.key}<#else> </#if></td>
+					<td width="40%">
+				<a href="/editor?modelId=${model.id}">编辑</a>
+				<a href="/publish?modelId=${model.id}">发布</a>
+				<a href="/revokePublish?modelId=${model.id}">撤销</a>
+				<a href="/delete?modelId=${model.id}">删除</a>
+					</td>
+					</tr>
+				</#list>
+			</#if>
+
 	</table>
 </div>
 </body>
